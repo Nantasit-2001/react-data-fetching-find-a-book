@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import axios, { Axios } from "axios"
+import axios from "axios"
+import { debounce } from "lodash";
 function FineBook (){
 
     const [textInput,setTectInput] = useState("")
@@ -20,7 +21,7 @@ function FineBook (){
     return(
         <div>
             <h1>Find a book</h1>
-            <input type="text" value={textInput} onChange={(event)=>setTectInput(event.target.value)} />
+            <input type="text" value={textInput} onChange={(event)=>debounce(setTectInput(event.target.value),2000)} />
             <ul>
                 {dataFormGoogle.map((item)=><li>{item.volumeInfo.title}</li>)}
             </ul>
