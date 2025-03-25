@@ -5,7 +5,12 @@ function FineBook (){
     const [textInput,setTectInput] = useState("")
     const [dataFormGoogle,setdataFormGoogle] = useState([]);
 
-    useEffect(()=>{getDataGoogle()},[textInput])
+    useEffect(() => { const timer = setTimeout(() => {getDataGoogle()},600);  // ตั้งเวลาไว้ 500ms
+         return () => {clearTimeout(timer)}}, 
+        [textInput]);    
+
+    // useEffect(()=>{getDataGoogle()},[textInput])
+
     async function getDataGoogle (){
         try{
         const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${textInput}`)
